@@ -3,8 +3,10 @@
   <hr />
 
   <% @courses.each do |course| %>
+    <div class="booyah-box">
     <h2 class="text-center">
       <%= link_to course.title, course_path(course) %>
+      <br /><br />
     <%= image_tag course.image.url(:thumb), class: 'img-fluid' %>
     </h2>
     <br />
@@ -17,5 +19,6 @@
       </div>
     </div>
     <br class="clr" />
+  </div>
   <% end %>
 </div>
