@@ -1,35 +1,34 @@
 class EnrollmentsController < ApplicationController
   before_action :authenticate_user!
-  
-  def new
-  end
 
   def create
-  	# Amount in cents
-    @amount = 500
+    if current_course.premium?
 
-    customer = Stripe::Customer.create({
-      email: params[:stripeEmail],
-      source: params[:stripeToken],
-    })
+      @amount = (current_course.cost * 100).to_i
+      customer = Stripe::Customer.create(
+        :email => current_user.email,
+        :card  => params[:stripeToken]
+      )
 
-    charge = Stripe::Charge.create({
-      customer: customer.id,
-      amount: @amount,
-      description: 'Rails Stripe customer',
-      currency: 'usd',
-    })
+      charge = Stripe::Charge.create(
+        :customer    => customer.id,
+        :amount      => @amount,
+        :description => 'Flixter course #{current_course.title}',
+        :currency    => 'usd'
+      )
+    end
+    
+    current_user.enrollments.create(course: current_course)
+    redirect_to course_path(current_course)
 
     rescue Stripe::CardError => e
       flash[:error] = e.message
-      redirect_to new_charge_path
-    end
-    current_user.enrollments.create(course: current_course)
-    redirect_to course_path(current_course)
+      redirect_to course_path(current_course)
   end
 
   private
 
   def current_course
-    @current_course ||= Course.find(params[:course_id])
+    @course ||= Course.find(params[:course_id])
   end
+end
