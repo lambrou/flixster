@@ -1,12 +1,11 @@
 <script>
-  $('.new-lesson-button').click(function( event ) {
-    var lessonUrl = $( event.target).data('lesson-url');
-    $('#newLessonForm').attr('action', lessonUrl);
-  });
-
   $(function() {
+    $('.new-lesson-button').click(function( event ) {
+      var lessonUrl = $( event.target ).data('lesson-url') ;
+      $('#newLessonForm').attr('action', lessonUrl );
+    });
     $('.lessons').sortable({
-      update: function( event, ui ) {
+      update: function(event, ui) {
         $.ajax({
           type: 'PUT',
           url: ui.item.data('update-url'),
@@ -15,20 +14,20 @@
         });
       }
     });
-
-
+  });
+  $(function() {
     $('.sections').sortable({
       update: function( event, ui ) {
         $.ajax({
           type: 'PUT',
           url: ui.item.data('update-url'),
           dataType: 'json',
-          data: { section: { row_order_position: ui.item.index() } }
+          data: { section: { row_order_position: ui.item.index() } } 
         });
       }
     });
-
   });
+  
 </script>
 
 <br />
