@@ -13,3 +13,7 @@ User authentication (Devise)
 Stripe payments
 
 Video and image uploader to Amazon S3 (Carrierwave)
+
+# Try it!
+
+https://lambrou-flixster.herokuapp.com/
