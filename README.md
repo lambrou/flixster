@@ -1,24 +1,15 @@
-# README
+# Flixster
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Flixster is a video sharing app, allowing anyone to be an instructor of any topic! 
 
-Things you may want to cover:
+# Built With
 
-* Ruby version
+Rails/PostgreSQL and Bootstrap
 
-* System dependencies
+Features:
 
-* Configuration
+User authentication (Devise)
 
-* Database creation
+Stripe payments
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Video and image uploader to Amazon S3 (Carrierwave)
